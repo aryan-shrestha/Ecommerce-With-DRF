@@ -1,0 +1,35 @@
+.cart {
+  position: relative;
+}
+
+table {
+  /* border-collapse: collapse; */
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.heading {
+  background-color: #2f2e41;
+  height: 10vh;
+  color: #dedee1;
+  font-size: 18px;
+  border-radius: 30px;
+}
+
+.cart-btn {
+  background-color: #2f2e41;
+  color: #dedee1;
+  position: absolute;
+  bottom: -60px;
+}
+
+.checkout-btn {
+  right: 10px;
+}
+
+.update-btn {
+  right: 150px;
+}

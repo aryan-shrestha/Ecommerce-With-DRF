@@ -1,0 +1,62 @@
+.banner {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-text > p {
+  font-size: 16px;
+  margin-top: 15px;
+  color: rgb(50, 50, 50);
+  line-height: 28px;
+}
+
+.hero-text > h1 {
+  font-size: 48px;
+  color: #2f2e41;
+}
+
+.hero-btns {
+  padding: 5px;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.btn {
+  font-size: 16px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+}
+
+.shop-now-btn {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.learn-more-btn {
+  color: #2f2e41;
+  background-color: #ecececcf;
+}
+
+.learn-more-btn:hover {
+  background-color: #6c63ff;
+  color: #fff;
+  box-shadow: 0px 0px 62px -18px rgba(0, 0, 0, 0.75);
+}
+
+.shop-now-btn:hover {
+  color: #2f2e41;
+  background-color: #ecececcf;
+  box-shadow: 0px 0px 62px -18px rgba(0, 0, 0, 0.75);
+}

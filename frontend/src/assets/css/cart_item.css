@@ -1,0 +1,33 @@
+td {
+  padding: 10px;
+  color: #2f2e41;
+}
+
+.cart-product {
+  display: flex;
+  align-items: center;
+}
+
+.cart-product > img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.quanity-btn {
+  cursor: pointer;
+}
+
+.quanity-btn:hover {
+  color: #6b62fd;
+}
+
+.delete-btn {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.delete-btn:hover {
+  color: rgba(255, 0, 0, 0.752);
+}

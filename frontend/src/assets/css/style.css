@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.mx-width {
+  max-width: 1170px;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+
+.m-10 {
+  margin-top: 10vh;
+}
+
+a {
+  text-decoration: none;
+}

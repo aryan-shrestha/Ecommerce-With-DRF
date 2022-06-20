@@ -1,0 +1,88 @@
+.shop-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-flex-3 {
+  flex: 3;
+}
+
+.col-flex-1 {
+  flex: 1;
+}
+
+.filter > option {
+  padding: 15px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  align-items: center;
+  padding: 5px;
+}
+
+.price-filter {
+  height: 5vh;
+  display: flex;
+}
+
+.price-filter > select {
+  outline: none;
+}
+
+.search-box {
+  width: 40%;
+  height: 7vh;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.search-box > input {
+  height: 100%;
+  width: 85%;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-box > i {
+  font-size: 20px;
+  padding-right: 8px;
+}
+
+.categories-container {
+  margin-left: 20px;
+  padding: 20px;
+  color: #2f2e41;
+}
+
+.categories-container > h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.categories {
+  list-style: none;
+  line-height: 40px;
+}
+
+.categories > li {
+  margin: 5px;
+  transition: all 0.5s ease;
+}
+
+.categories > li > a {
+  color: #2f2e41;
+}
+
+.categories > li:hover {
+  transform: translateX(20px);
+}

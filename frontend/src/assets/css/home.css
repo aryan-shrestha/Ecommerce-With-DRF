@@ -1,0 +1,26 @@
+.our-top-collection-container > h2 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.gender-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  background-color: #ecececcf;
+  flex: 1;
+  margin: 10px;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.category > a {
+  font-size: 24px;
+  color: #2f2e41;
+}
