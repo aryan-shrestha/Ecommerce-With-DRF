@@ -9,7 +9,7 @@ import TitleBanner from "../components/TitleBanner";
 function Shop() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState("")
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [categories, setCategories] = useState([]);
 
   function fetchItems(url) {
@@ -20,10 +20,9 @@ function Shop() {
   }
 
   function getCategories() {
-    axios.get('/item/category_list/')
-    .then((res) => {
-      setCategories(res.data)
-    })
+    axios.get("/item/category_list/").then((res) => {
+      setCategories(res.data);
+    });
   }
 
   useEffect(() => {
@@ -35,7 +34,7 @@ function Shop() {
     setSearchKeyword(e.target.value);
   }
 
-  function handleSearch(){
+  function handleSearch() {
     fetchItems(`/item/list/?search=${searchKeyword}`);
   }
 
@@ -45,7 +44,7 @@ function Shop() {
     fetchItems(`/item/list/?ordering=${sort}`);
   }
 
-  function handleCategory(category_id){
+  function handleCategory(category_id) {
     console.log(category_id);
     fetchItems(`/item/list/?category=${category_id}`);
   }
@@ -58,8 +57,17 @@ function Shop() {
         <div className="col-flex-3">
           <div className="filter-container mx-width m-auto">
             <div className="search-box">
-              <input type="text" placeholder="Search..." value={searchKeyword} onChange={handleSearchKeywordChange}/>
-              <i className="fas fa-search" style={{'cursor':'pointer', 'transform': 'scale(1.3)'}} onClick={handleSearch} ></i>
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchKeyword}
+                onChange={handleSearchKeywordChange}
+              />
+              <i
+                className="fas fa-search"
+                style={{ cursor: "pointer", transform: "scale(1.3)" }}
+                onClick={handleSearch}
+              ></i>
             </div>
             <form className="price-filter" onSubmit={handleSorting}>
               <label
@@ -72,7 +80,12 @@ function Shop() {
                 <option value="price">low to high </option>
                 <option value="-price">high to low</option>
               </select>
-              <button type="submit" style={{"margin-left":"10px", "padding":"5px 10px"}}>Filter</button>
+              <button
+                type="submit"
+                style={{ marginLeft: "10px", padding: "5px 10px" }}
+              >
+                Filter
+              </button>
             </form>
           </div>
 
@@ -97,14 +110,20 @@ function Shop() {
           <div className="categories-container">
             <h3>Categories</h3>
             <ul className="categories">
-              {categories.map((category)=>{
+              {categories.map((category) => {
                 return (
-                <li key={category.id}>
-                  <p style={{"cursor":"pointer"}} onClick={()=>{handleCategory(category.id)}}>{category.name}</p>
-                </li>
-                )
+                  <li key={category.id}>
+                    <p
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        handleCategory(category.id);
+                      }}
+                    >
+                      {category.name}
+                    </p>
+                  </li>
+                );
               })}
-              
             </ul>
           </div>
         </div>

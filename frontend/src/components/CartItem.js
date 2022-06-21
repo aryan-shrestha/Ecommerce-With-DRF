@@ -7,7 +7,7 @@ import "../assets/css/cart_item.css";
 function CartItem(props) {
   const [quantity, setQuantity] = useState(props.quantity);
   const [itemId, setItemId] = useState(props.id);
-  const { updateQuantity, deleteItem } = useCart();
+  const { updateQuantity } = useCart();
 
   function handleAdd() {
     setQuantity(quantity + 1);

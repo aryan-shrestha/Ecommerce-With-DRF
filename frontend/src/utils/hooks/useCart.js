@@ -1,23 +1,18 @@
-import React from "react";
-
 import axios from "../axios/axios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Redirect } from "react-router-dom";
 
 function useCart() {
   const { user, authToken } = useContext(AuthContext);
-  const [items, setItems] = useState([]);
   const [cartID, setCartId] = useState(null);
 
   axios.defaults.headers.common["Authorization"] = "Bearer " + authToken.access;
 
-  function fetchCartItems() {
+  function getCartId() {
     axios
       .get(`/cart/${user.user_id}`)
       .then((res) => {
-        setItems(res.data[0].order_items);
-        setCartId(res.data[0].id);
+        setCartId(res.data.id);
       })
       .catch((err) => {
         console.log(err);
@@ -48,36 +43,13 @@ function useCart() {
       });
   }
 
-  function deleteItem(item_id, index) {
-    axios
-      .delete(`cart/order_item/${item_id}/`)
-      .then((res) => {
-        console.log("deleted");
-        console.log(index);
-        setItems(items.splice(index, 1));
-        console.log(items);
-      })
-      .catch((err) => {
-        console.log("error wihe updateing >>", err);
-      });
-  }
-
   useEffect(() => {
-    fetchCartItems();
+    getCartId();
   }, []);
 
-  useEffect(() => {
-    function refreshCart() {
-      fetchCartItems();
-    }
-  });
-
   return {
-    items: items,
     addItemToCart: addItemToCart,
     updateQuantity: updateQuantity,
-    fetchCartItems: fetchCartItems,
-    deleteItem: deleteItem,
   };
 }
 
