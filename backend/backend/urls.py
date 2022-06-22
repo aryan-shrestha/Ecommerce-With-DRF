@@ -1,4 +1,4 @@
-from django.contrib import admin
+from baton.autodiscover import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -59,6 +59,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html")),
     path('admin/', admin.site.urls),
+    path('baton/', include('baton.urls')),
     path('user/', include('account.urls')),
     path('item/', include('items.urls')),
     path('cart/', include('cart.urls')),

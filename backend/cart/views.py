@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 
 from cart.serializers import OrderItemUpdateSerializer, OrderSerializer, OrderItemSerializer
 from cart.models import Order, OrderItem
-from items.models import Item
+
 # Create your views here.
 
 User = get_user_model()
@@ -55,13 +55,24 @@ class OrderItemCreateView(APIView):
 class OrderDetailView(APIView):
     permission_classes = [IsAuthenticated]
     """
-    List all th orders/carts of the requested user
+    List all the orders/carts of the requested user
     """
+    # requires user id 
     def get(self, request, pk, format=None):
         user = User.objects.get(id=pk)
-        order = Order.objects.filter(user=user, complete=False)
-        serializer = OrderSerializer(order, many=True)
+        order = Order.objects.filter(user=user, complete=False)[0]
+        serializer = OrderSerializer(order)
         return Response(serializer.data)
+    
+
+    # requires cart id 
+    def put(self, request, pk, format=None):
+        order = Order.objects.get(id=pk)
+        serializer = OrderSerializer(order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class OrderCreateView(APIView):
     permission_classes = [IsAuthenticated]

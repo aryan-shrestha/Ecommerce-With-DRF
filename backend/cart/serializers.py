@@ -56,3 +56,9 @@ class OrderSerializer(serializers.ModelSerializer):
         user = User.objects.get(id=user_id)
         order = Order.objects.create(user=user)
         return order
+
+    def update(self, instance, validated_data):
+        instance.complete = True
+        instance.save()
+
+        return instance
