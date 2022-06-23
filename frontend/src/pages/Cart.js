@@ -12,6 +12,7 @@ import "../assets/css/cart.css";
 function Cart() {
   const { user, authToken } = useContext(AuthContext);
   const [items, setItems] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
 
   axios.defaults.headers.common["Authorization"] = "Bearer " + authToken.access;
 
@@ -20,6 +21,8 @@ function Cart() {
       .get(`/cart/${user.user_id}`)
       .then((res) => {
         setItems(res.data.order_items);
+        setCartTotal(res.data.total);
+        console.log("total: ", cartTotal);
       })
       .catch((err) => {
         console.log(err);
@@ -70,9 +73,17 @@ function Cart() {
                   image={item.item.image}
                   index={index}
                   deleteFunc={deleteItem}
+                  fetchCartItems={fetchCartItems}
                 />
               );
             })}
+
+            <tr style={{ fontSize: "18px", color: "#57595A" }}>
+              <th>Grand Total</th>
+              <th></th>
+              <th></th>
+              <th>{cartTotal}</th>
+            </tr>
           </tbody>
         </table>
         {items.length < 1 ? (

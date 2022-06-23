@@ -21,6 +21,7 @@ function CartItem(props) {
 
   useEffect(() => {
     updateQuantity(itemId, quantity);
+    props.fetchCartItems();
   }, [quantity]);
 
   return (
@@ -53,7 +54,7 @@ function CartItem(props) {
       </td>
 
       <td>
-        <p>Rs. 9999</p>
+        <p>{quantity * props.price}</p>
       </td>
       <td>
         <p>

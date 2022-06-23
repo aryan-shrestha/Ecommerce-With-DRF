@@ -17,7 +17,6 @@ function Shop() {
   function fetchItems(url) {
     axios.get(url).then((res) => {
       setItems(res.data.results);
-      console.log(res.data);
 
       /* Checking if the previous page url is null or not. If it is not null, it will set the previous
     page url to the url. If it is null, it will set the previous page url to null. */

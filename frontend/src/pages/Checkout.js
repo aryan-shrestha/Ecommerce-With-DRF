@@ -12,6 +12,7 @@ function Checkout() {
   const { user, authToken } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState("");
+  const [cartTotal, setCartTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
@@ -23,6 +24,7 @@ function Checkout() {
       .then((res) => {
         setCart(res.data);
         setItems(res.data.order_items);
+        setCartTotal(res.data.total);
       })
       .catch((err) => {
         console.log(err);
@@ -84,6 +86,16 @@ function Checkout() {
                 />
               );
             })}
+            {items.length < 1 ? (
+              ""
+            ) : (
+              <tr style={{ fontSize: "18px", color: "#57595A" }}>
+                <th>Grand Total</th>
+                <th></th>
+                <th></th>
+                <th>{cartTotal}</th>
+              </tr>
+            )}
           </tbody>
         </table>
         {items.length < 1 ? (

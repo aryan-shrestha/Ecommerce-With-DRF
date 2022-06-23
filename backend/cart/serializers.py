@@ -1,3 +1,4 @@
+from re import sub
 import uuid
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
@@ -35,8 +36,24 @@ class OrderItemUpdateSerializer(serializers.ModelSerializer):
         fields = ['id', 'quantity']
 
     def update(self, instance,validate_data):
+
         instance.quantity = validate_data.get('quantity', instance.quantity)
+        print(instance.quantity)
         instance.save()
+        # calculating cart total after updating quantity
+        cart = instance.order
+        cart_items = cart.order_items.all()
+        cart_total = 0
+        
+        for item in cart_items:
+            sub_total = item.item.price * item.quantity
+            cart_total += sub_total
+
+        cart.total = cart_total
+        cart.save()
+        print("cart total calculated")
+        print("cart total: ", cart.total)
+        
 
         return instance
 
@@ -46,7 +63,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'user', 'date_ordered', 'complete', 'transaction_id','order_items']
+        fields = ['id', 'user', 'date_ordered', 'complete', 'transaction_id','order_items', 'total']
     
     def create(self, validated_data):
         print(f"validated_data: {validated_data}")
