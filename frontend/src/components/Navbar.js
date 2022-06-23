@@ -25,20 +25,6 @@ function Navbar() {
     }
   }, []);
 
-  // console.log(authToken);
-
-  // axios.defaults.headers.common["Authorization"] = "Bearer " + authToken.access;
-
-  // function getUserFirstName() {
-  //   axios.get(`/user/detail/${user.user_id}`).then((res) => {
-  //     setUserFirstName(res.data.first_name);
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   getUserFirstName();
-  // }, []);
-
   return (
     <div className="navbar-container">
       <div className="navbar">

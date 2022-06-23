@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "../utils/axios/axios";
@@ -86,7 +86,14 @@ function Cart() {
               fontSize: "18px",
             }}
           >
-            No Items in your cart.
+            No Items in your cart. Go to{" "}
+            <Link
+              to="/shop"
+              style={{ color: "#6B62FD", textDecoration: "underline" }}
+            >
+              Shop
+            </Link>{" "}
+            and add items to you cart.
           </div>
         ) : (
           ""
