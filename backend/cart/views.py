@@ -64,7 +64,6 @@ class OrderDetailView(APIView):
         serializer = OrderSerializer(order)
         return Response(serializer.data)
     
-
     # requires cart id 
     def put(self, request, pk, format=None):
         order = Order.objects.get(id=pk)

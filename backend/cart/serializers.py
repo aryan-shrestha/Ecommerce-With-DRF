@@ -1,4 +1,4 @@
-from venv import create
+import uuid
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -58,6 +58,7 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
     def update(self, instance, validated_data):
+        instance.transaction_id = uuid.uuid1()
         instance.complete = True
         instance.save()
 

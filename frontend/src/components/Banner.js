@@ -18,10 +18,10 @@ function Banner() {
           dignissimos.
         </p>
         <div className="hero-btns">
-          <Link to="#" className="learn-more-btn btn">
+          <Link to="/about" className="learn-more-btn btn">
             Learn More
           </Link>
-          <Link to="#" className="shop-now-btn btn">
+          <Link to="/shop" className="shop-now-btn btn">
             Shop Now
           </Link>
         </div>

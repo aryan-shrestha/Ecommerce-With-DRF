@@ -16,7 +16,7 @@ def post_save_create_new_order(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Order)
 def post_save_send_order_confirmation_mail(sender, instance, created, **kwargs):
 
-    template = render_to_string('cart/email_template.html', {'username': instance.user.username})
+    template = render_to_string('cart/email_template.html', {'username': instance.user.username, 'transaction_id': instance.transaction_id})
 
     if instance.complete == True:
         email = EmailMessage(

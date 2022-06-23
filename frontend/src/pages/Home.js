@@ -39,6 +39,7 @@ function Home() {
                 src={item.image}
                 name={item.name}
                 price={item.price}
+                id={item.id}
                 key={item.id}
               />
             );
@@ -46,11 +47,9 @@ function Home() {
         </div>
       </div>
 
-      {/* category section */}
-
       <div className="mx-width m-auto m-10 gender-category">
         <div className="category hover-scaleup">
-          <Link to="#">
+          <Link to="/shop">
             {" "}
             <h3>
               <span style={{ fontSize: "28px", color: "#6c63ff" }}>
@@ -63,7 +62,7 @@ function Home() {
         </div>
         <div className="category hover-scaleup">
           <img src={man2} alt="man" />
-          <Link to="#">
+          <Link to="/shop">
             <h3>
               <span style={{ fontSize: "28px", color: "#6c63ff" }}>Men's</span>{" "}
               <br />
