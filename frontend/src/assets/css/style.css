@@ -23,3 +23,9 @@ body {
 a {
   text-decoration: none;
 }
+
+.disable-link {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.8;
+}

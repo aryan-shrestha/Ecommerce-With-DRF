@@ -24,19 +24,13 @@ export const AuthProvider = ({ children }) => {
 
   let history = useHistory();
 
-  let loginUser = (e) => {
-    e.preventDefault();
-
-    let username = e.target.username.value;
-    let password = e.target.password.value;
-
+  let loginUser = (username, password) => {
     axios
       .post("api/token/", {
         username: username,
         password: password,
       })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           setAuthToken(response.data);
           setUser(jwt_decode(response.data.access));

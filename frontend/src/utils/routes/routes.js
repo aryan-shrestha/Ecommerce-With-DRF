@@ -6,6 +6,7 @@ import Shop from "../../pages/Shop";
 import Cart from "../../pages/Cart";
 import Login from "../../pages/Login";
 import Register from "../../pages/Register";
+import Checkout from "../../pages/Checkout";
 
 const routes = [
   {
@@ -35,9 +36,14 @@ const routes = [
     authenticatedTo: "guest",
   },
   {
-    path:"/register",
+    path: "/register",
     component: () => <Register />,
     authenticatedTo: "guest",
+  },
+  {
+    path: "/checkout",
+    component: () => <Checkout />,
+    authenticatedTo: "auth",
   },
 ];
 

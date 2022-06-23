@@ -1,11 +1,44 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import axios from "../utils/axios/axios";
 
 import "../assets/css/navbar.css";
 import AuthContext from "../context/AuthContext";
 
 function Navbar() {
-  let { user, logoutUser } = useContext(AuthContext);
+  let { user, logoutUser, authToken } = useContext(AuthContext);
+  const [userFirstName, setUserFirstName] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + authToken.access;
+
+      function getUserFirstName() {
+        axios.get(`/user/detail/${user.user_id}/`).then((res) => {
+          setUserFirstName(res.data.first_name);
+        });
+      }
+
+      getUserFirstName();
+    }
+  }, []);
+
+  // console.log(authToken);
+
+  // axios.defaults.headers.common["Authorization"] = "Bearer " + authToken.access;
+
+  // function getUserFirstName() {
+  //   axios.get(`/user/detail/${user.user_id}`).then((res) => {
+  //     setUserFirstName(res.data.first_name);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getUserFirstName();
+  // }, []);
+
   return (
     <div className="navbar-container">
       <div className="navbar">
@@ -46,7 +79,7 @@ function Navbar() {
         <div className="nav-links">
           {user ? (
             <Link className="nav-link nav-link-padding" to="#">
-              {user.username}
+              Hello, {userFirstName}
             </Link>
           ) : (
             <Link className="nav-link nav-link-padding" to="/login">

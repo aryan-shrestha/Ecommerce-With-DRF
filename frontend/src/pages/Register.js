@@ -1,12 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 
 import TitleBanner from "../components/TitleBanner";
 import axios from "../utils/axios/axios";
 
 import register from "../assets/images/register.svg";
+import AuthContext from "../context/AuthContext";
 
 function Register() {
+  const { loginUser } = useContext(AuthContext);
+  const [userCreated, setUserCreated] = useState(false);
+
   function registerUser(e) {
     e.preventDefault();
 
@@ -28,7 +32,15 @@ function Register() {
       })
       .then((res) => {
         console.log(res);
+        setUserCreated(true);
+      })
+      .catch((err) => {
+        console.log(err);
       });
+  }
+
+  if (userCreated) {
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -97,8 +109,11 @@ function Register() {
             </button>
           </form>
           <p>
-            Don't have an account? <Link to="/register">Click</Link> here to
-            create
+            Already have an account?{" "}
+            <Link to="/login" style={{ color: "#6C63FF" }}>
+              Click
+            </Link>{" "}
+            here to login.
           </p>
         </div>
       </div>

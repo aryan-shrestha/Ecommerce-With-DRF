@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "../utils/axios/axios";
@@ -75,14 +75,35 @@ function Cart() {
             })}
           </tbody>
         </table>
+        {items.length < 1 ? (
+          <div
+            className="no-items"
+            style={{
+              width: "100%",
+              textAlign: "center",
+              marginTop: "15px",
+              marginBottom: "15px",
+              fontSize: "18px",
+            }}
+          >
+            No Items in your cart.
+          </div>
+        ) : (
+          ""
+        )}
 
-        <Link to="#" className=" update-btn cart-btn btn ">
-          Update Cart
-        </Link>
-
-        <Link to="#" className=" checkout-btn cart-btn btn ">
-          Checkout
-        </Link>
+        {items.length < 1 ? (
+          <Link
+            to="/checkout"
+            className="checkout-btn cart-btn btn disable-link"
+          >
+            Checkout
+          </Link>
+        ) : (
+          <Link to="/checkout" className="checkout-btn cart-btn btn">
+            Checkout
+          </Link>
+        )}
       </div>
     </div>
   );

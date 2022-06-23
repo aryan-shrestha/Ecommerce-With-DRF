@@ -10,6 +10,15 @@ import AuthContext from "../context/AuthContext";
 function Login() {
   let { loginUser } = useContext(AuthContext);
 
+  function handleLogin(e) {
+    e.preventDefault();
+
+    let userName = e.target.username.value;
+    let password = e.target.password.value;
+
+    loginUser(userName, password);
+  }
+
   return (
     <div className="login-page">
       <TitleBanner url="/login" currentPage={"Login"} />
@@ -23,7 +32,7 @@ function Login() {
             To keep connected with us please login with your personal
             information by email address and password
           </p>
-          <form autoComplete="off" autoSave="off" onSubmit={loginUser}>
+          <form autoComplete="off" autoSave="off" onSubmit={handleLogin}>
             <div className="input-container">
               <i className="fas fa-envelope"></i>
               <input
@@ -46,7 +55,10 @@ function Login() {
               Login
             </button>
           </form>
-          <p>Don't have an account? <Link to="/register">Click</Link> here to create</p>
+          <p>
+            Don't have an account? <Link to="/register">Click</Link> here to
+            create
+          </p>
         </div>
       </div>
     </div>
