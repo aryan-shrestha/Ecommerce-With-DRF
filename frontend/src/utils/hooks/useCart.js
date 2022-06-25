@@ -33,26 +33,12 @@ function useCart() {
       });
   }
 
-  function updateQuantity(item_id, quantity) {
-    axios
-      .put(`cart/order_item/${item_id}/`, {
-        quantity: quantity,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   useEffect(() => {
     getCartId();
   }, []);
 
   return {
     addItemToCart: addItemToCart,
-    updateQuantity: updateQuantity,
   };
 }
 
