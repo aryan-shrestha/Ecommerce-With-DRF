@@ -16,31 +16,48 @@ function Cart() {
 
   axios.defaults.headers.common["Authorization"] = "Bearer " + authToken.access;
 
+  // this function sets the items state value and cartTotal state value
+  // eacth time the page refreshes
+  function setCart(res) {
+    console.log(res.data);
+    setItems(res.data.order_items);
+    setCartTotal(res.data.total);
+  }
+
+  console.log(cartTotal);
+
   function fetchCartItems() {
     axios
       .get(`/cart/${user.user_id}`)
       .then((res) => {
-        setItems(res.data.order_items);
-        setCartTotal(res.data.total);
-        console.log("total: ", cartTotal);
+        setCart(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  function deleteItem(item_id, index) {
+  function updateQuantity(item_id, quantity) {
+    axios
+      .put(`cart/order_item/${item_id}/`, {
+        quantity: quantity,
+      })
+      .then((res) => {
+        setCart(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function deleteItem(item_id) {
     axios
       .delete(`cart/order_item/${item_id}/`)
       .then((res) => {
-        setItems(
-          items.filter((ele) => {
-            return ele.id !== item_id;
-          })
-        );
+        fetchCartItems();
       })
       .catch((err) => {
-        console.log("error while updating >>", err);
+        console.log("error while deleting >>", err);
       });
   }
 
@@ -73,7 +90,7 @@ function Cart() {
                   image={item.item.image}
                   index={index}
                   deleteFunc={deleteItem}
-                  fetchCartItems={fetchCartItems}
+                  updateQuantity={updateQuantity}
                 />
               );
             })}

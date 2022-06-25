@@ -27,6 +27,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
             print("Item already exists")
             order_item.quantity += 1
             order_item.save()
+
+        order_item.order.calculate_cart_total()
         return order_item
 
 class OrderItemUpdateSerializer(serializers.ModelSerializer):
@@ -35,27 +37,12 @@ class OrderItemUpdateSerializer(serializers.ModelSerializer):
         model = OrderItem
         fields = ['id', 'quantity']
 
-    def update(self, instance,validate_data):
-
+    def update(self, instance, validate_data):
         instance.quantity = validate_data.get('quantity', instance.quantity)
-        print(instance.quantity)
         instance.save()
-        # calculating cart total after updating quantity
-        cart = instance.order
-        cart_items = cart.order_items.all()
-        cart_total = 0
-        
-        for item in cart_items:
-            sub_total = item.item.price * item.quantity
-            cart_total += sub_total
+        instance.order.calculate_cart_total()
 
-        cart.total = cart_total
-        cart.save()
-        print("cart total calculated")
-        print("cart total: ", cart.total)
-        
-
-        return instance
+        return instance.order.total
 
 
 class OrderSerializer(serializers.ModelSerializer):

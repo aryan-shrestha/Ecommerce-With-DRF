@@ -38,6 +38,9 @@ function useCart() {
       .put(`cart/order_item/${item_id}/`, {
         quantity: quantity,
       })
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => {
         console.log(err);
       });

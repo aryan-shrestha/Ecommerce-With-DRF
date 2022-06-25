@@ -40,14 +40,14 @@ function App() {
                 );
               }
               if (route.authenticatedTo === null) {
-              return (
-                <Route
-                  path={route.path}
-                  exact={route.exact}
-                  component={route.component}
-                  key={index}
-                />
-              );
+                return (
+                  <Route
+                    path={route.path}
+                    exact={route.exact}
+                    component={route.component}
+                    key={index}
+                  />
+                );
               }
             })}
           </Switch>

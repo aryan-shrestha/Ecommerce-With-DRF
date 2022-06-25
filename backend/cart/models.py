@@ -16,7 +16,17 @@ class Order(models.Model):
 
    def __str__(self):
        return f"{self.user.username}_completed_{self.complete}"
+    
+   def calculate_cart_total(self):
+       cart_total = 0
+       items = self.order_items.all()
 
+       for item in items:
+           sub_total = item.item.price * item.quantity
+           cart_total += sub_total
+       
+       self.total = cart_total
+       self.save()
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True, related_name="order_items")

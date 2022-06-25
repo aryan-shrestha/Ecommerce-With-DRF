@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
+import axios from "../utils/axios/axios";
 import useCart from "../utils/hooks/useCart";
+import AuthContext from "../context/AuthContext";
 
 import "../assets/css/cart_item.css";
 
 function CartItem(props) {
-  const [quantity, setQuantity] = useState(props.quantity);
-  const [itemId, setItemId] = useState(props.id);
-  const { updateQuantity } = useCart();
-
   function handleAdd() {
-    setQuantity(quantity + 1);
+    props.updateQuantity(props.id, props.quantity + 1);
   }
 
   function handleMinus() {
-    if (quantity === 1) return;
-
-    setQuantity(quantity - 1);
+    if (props.quantity == 1) return;
+    props.updateQuantity(props.id, props.quantity - 1);
   }
-
-  useEffect(() => {
-    updateQuantity(itemId, quantity);
-    props.fetchCartItems();
-  }, [quantity]);
 
   return (
     <tr>
@@ -45,7 +37,7 @@ function CartItem(props) {
           style={{ marginRight: "20px" }}
           onClick={handleMinus}
         ></i>
-        {quantity}
+        {props.quantity}
         <i
           className="fas fa-plus quanity-btn"
           style={{ marginLeft: "20px" }}
@@ -54,7 +46,7 @@ function CartItem(props) {
       </td>
 
       <td>
-        <p>{quantity * props.price}</p>
+        <p>{props.quantity * props.price}</p>
       </td>
       <td>
         <p>

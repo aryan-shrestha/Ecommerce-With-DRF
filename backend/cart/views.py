@@ -25,17 +25,23 @@ class OrderItemDetailView(APIView):
         serializer = OrderItemSerializer(order_item)
         return Response(serializer.data)
 
+
+    # Returns cart
     def put(self, request, pk, format=None):
         order_item = OrderItem.objects.get(id=pk)
         serializer = OrderItemUpdateSerializer(order_item, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            cart = OrderSerializer(order_item.order).data
+            print("views line 38, Cart Total: ", order_item.order.total)
+            return Response(cart, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         order_item = OrderItem.objects.get(id=pk)
+        order = order_item.order
         order_item.delete()
+        order.calculate_cart_total()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class OrderItemCreateView(APIView):
